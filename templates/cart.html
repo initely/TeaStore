@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Корзина - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/cart.css">
+{% endblock %}
+
+{% block content %}
+<div class="cart-page">
+    <div class="container">
+        <h1>Корзина</h1>
+        
+        <div id="cartContent" class="cart-content">
+            <div class="loading">Загрузка корзины...</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/cart.js"></script>
+{% endblock %}
+
+
+
+
+
+
+

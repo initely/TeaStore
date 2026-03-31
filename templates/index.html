@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="/static/css/home.css">
+<link rel="stylesheet" href="/static/css/tea_map.css">
+{% endblock %}
+
+{% block content %}
+<!-- Герой-секция -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Путешествуйте по миру чая</h1>
+        <p class="hero-subtitle">Откройте для себя уникальные вкусы из разных уголков планеты</p>
+        <div class="hero-buttons">
+            <a href="/tea-map" class="btn btn-primary">Исследовать карту</a>
+            <a href="/blend-constructor" class="btn btn-outline">Создать свой сбор</a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <div class="hero-placeholder">🌍</div>
+    </div>
+</section>
+
+<!-- Интерактивная карта -->
+<section class="map-section">
+    <div class="container">
+        <h2 class="text-center">Чайная карта мира</h2>
+        <p class="text-center section-subtitle">Кликните на страну, чтобы увидеть её чайные регионы и перейти к каталогу</p>
+        <div class="world-map" id="worldMap">
+            <!-- Интерактивная карта будет загружена через JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Популярные чаи -->
+<section class="popular-teas">
+    <div class="container">
+        <h2 class="text-center">Популярные чаи</h2>
+        <p class="text-center section-subtitle">Лучшие чаи из нашей коллекции</p>
+        <div class="grid grid-4" id="popularTeas">
+            <!-- Будет заполнено через JavaScript -->
+            <div class="loading-placeholder">
+                <p>Загрузка...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Конструктор сборов -->
+<section class="blend-constructor-preview">
+    <div class="container">
+        <div class="constructor-card">
+            <div class="constructor-content">
+                <h2>Создайте свой уникальный чайный сбор</h2>
+                <p>Выберите основу и добавьте до 5 ингредиентов. Регулируйте пропорции и создайте идеальный вкус для
+                    себя.</p>
+                <ul class="constructor-features">
+                    <li>✓ Выбор основы (черный, зеленый, улун и др.)</li>
+                    <li>✓ До 5 дополнительных ингредиентов</li>
+                    <li>✓ Регулировка пропорций в реальном времени</li>
+                    <li>✓ Сохранение рецепта в личном кабинете</li>
+                </ul>
+                <a href="/blend-constructor" class="btn btn-primary">Открыть конструктор</a>
+            </div>
+            <div class="constructor-image">
+                <div class="constructor-placeholder">🧪</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Популярные авторские сборы -->
+<section class="popular-blends">
+    <div class="container">
+        <h2 class="text-center">Популярные авторские сборы</h2>
+        <p class="text-center section-subtitle">Лучшие рецепты от наших клиентов</p>
+        <div class="grid grid-3" id="popularBlends">
+            <!-- Будет заполнено через JavaScript -->
+            <div class="loading-placeholder">
+                <p>Загрузка...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/js/home.js"></script>
+<script src="/static/js/tea_map.js"></script>
+{% endblock %}

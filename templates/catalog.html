@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог чаев - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/catalog.css">
+{% endblock %}
+
+{% block content %}
+<div class="catalog-page">
+    <div class="container">
+        <h1>Каталог</h1>
+        
+        <!-- Табы для переключения между чаями и сборами -->
+        <div class="catalog-tabs">
+            <a href="/catalog?tab=teas{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.country_id %}&country_id={{ filters.country_id }}{% endif %}{% if filters.region_id %}&region_id={{ filters.region_id }}{% endif %}{% if filters.tea_type_id %}&tea_type_id={{ filters.tea_type_id }}{% endif %}{% if filters.flavor_id %}&flavor_id={{ filters.flavor_id }}{% endif %}{% if filters.sort %}&sort={{ filters.sort }}{% endif %}" class="catalog-tab {% if current_tab != 'blends' %}active{% endif %}" data-tab="teas">
+                Чаи
+            </a>
+            <a href="/catalog?tab=blends{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.tea_type_id %}&tea_type_id={{ filters.tea_type_id }}{% endif %}{% if filters.sort %}&sort={{ filters.sort }}{% endif %}" class="catalog-tab {% if current_tab == 'blends' %}active{% endif %}" data-tab="blends">
+                Авторские сборы
+            </a>
+        </div>
+        
+        <div class="catalog-layout">
+            <!-- Фильтры -->
+            <aside class="filters-sidebar">
+                <h3>Фильтры</h3>
+                
+                <form method="get" id="filterForm" onsubmit="event.preventDefault(); applyFilters(); return false;">
+                    <input type="hidden" name="tab" value="{{ current_tab or 'teas' }}">
+                    <!-- Поиск -->
+                    <div class="filter-group">
+                        <label>Поиск по названию</label>
+                        <input type="text" name="search" value="{{ filters.search or '' }}" placeholder="Введите название..." id="searchInput">
+                        <small class="search-hint">Поиск работает по части названия</small>
+                    </div>
+                    
+                    <!-- Страна -->
+                    <div class="filter-group">
+                        <label>Страна</label>
+                        <select name="country_id" id="countrySelect">
+                            <option value="">Все страны</option>
+                            {% for country in countries %}
+                            <option value="{{ country.id }}" {% if filters.country_id == country.id %}selected{% endif %}>
+                                {{ country.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <!-- Регион -->
+                    <div class="filter-group" id="regionGroup" style="{% if not filters.country_id %}display: none;{% endif %}">
+                        <label>Регион</label>
+                        <select name="region_id" id="regionSelect">
+                            <option value="">Все регионы</option>
+                            {% for region in regions %}
+                            <option value="{{ region.id }}" {% if filters.region_id == region.id %}selected{% endif %}>
+                                {{ region.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <!-- Тип чая -->
+                    <div class="filter-group">
+                        <label>Тип чая</label>
+                        <select name="tea_type_id">
+                            <option value="">Все типы</option>
+                            {% for tea_type in tea_types %}
+                            <option value="{{ tea_type.id }}" {% if filters.tea_type_id == tea_type.id %}selected{% endif %}>
+                                {{ tea_type.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <!-- Вкус (только для чаев) -->
+                    {% if current_tab != 'blends' %}
+                    <div class="filter-group">
+                        <label>Вкус/Аромат</label>
+                        <select name="flavor_id">
+                            <option value="">Все вкусы</option>
+                            {% for flavor in flavors %}
+                            <option value="{{ flavor.id }}" {% if filters.flavor_id == flavor.id %}selected{% endif %}>
+                                {{ flavor.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Сортировка -->
+                    <div class="filter-group">
+                        <label>Сортировка</label>
+                        <select name="sort">
+                            <option value="newest" {% if filters.sort == 'newest' %}selected{% endif %}>Сначала новые</option>
+                            <option value="popular" {% if filters.sort == 'popular' %}selected{% endif %}>Популярные</option>
+                            <option value="price_asc" {% if filters.sort == 'price_asc' %}selected{% endif %}>Цена: по возрастанию</option>
+                            <option value="price_desc" {% if filters.sort == 'price_desc' %}selected{% endif %}>Цена: по убыванию</option>
+                        </select>
+                    </div>
+                    
+                    <a href="/catalog" class="btn btn-outline" style="width: 100%; margin-top: var(--spacing-sm);">Сбросить фильтры</a>
+                </form>
+            </aside>
+            
+            <!-- Каталог -->
+            <main class="catalog-content">
+                <div class="catalog-header">
+                    <p class="results-count" id="resultsCount">
+                        {% if current_tab == 'blends' %}
+                            Загрузка...
+                        {% else %}
+                            Найдено: {{ total }} чаев
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <!-- Сборы (загружаются через JavaScript) -->
+                <div id="blendsContainer" class="blends-grid" style="{% if current_tab != 'blends' %}display: none;{% endif %}">
+                    <div class="loading">Загрузка сборов...</div>
+                </div>
+                
+                <!-- Чаи -->
+                <div id="teasContainer" style="{% if current_tab == 'blends' %}display: none;{% endif %}">
+                {% if teas %}
+                <div class="teas-grid" id="teasGrid">
+                    {% for tea in teas %}
+                    <div class="tea-card card">
+                        <div class="tea-image">
+                            {% if tea.main_image_url %}
+                            <img src="{{ tea.main_image_url }}" alt="{{ tea.name }}">
+                            {% else %}
+                            <div class="tea-placeholder">🍃</div>
+                            {% endif %}
+                        </div>
+                        <div class="tea-info">
+                            <h3><a href="/tea/{{ tea.slug }}">{{ tea.name }}</a></h3>
+                            <p class="tea-location">
+                                {% if tea.country %}🇺🇳 {{ tea.country.name }}{% endif %}
+                                {% if tea.region %} • {{ tea.region.name }}{% endif %}
+                            </p>
+                            <p class="tea-type">{{ tea.tea_type.name }}</p>
+                            <div class="tea-flavors">
+                                {% for flavor in tea.flavors[:3] %}
+                                <span class="flavor-tag">{{ flavor.name }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="tea-rating">
+                                ⭐ {{ "%.1f"|format(tea.rating) }} ({{ tea.review_count }})
+                            </div>
+                            <div class="tea-price">
+                                <span class="price-main">от {{ "%.0f"|format(tea.price_per_100g) }} ₽</span>
+                                {% if tea.price_per_20g %}
+                                <span class="price-sample">Пробник: {{ "%.0f"|format(tea.price_per_20g) }} ₽</span>
+                                {% endif %}
+                            </div>
+                            <div class="tea-actions">
+                                <a href="/tea/{{ tea.slug }}" class="btn btn-primary">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Пагинация -->
+                {% if total_pages > 1 %}
+                <div class="pagination">
+                    {% if current_page > 1 %}
+                    <a href="?page={{ current_page - 1 }}{% if filters.country_id %}&country_id={{ filters.country_id }}{% endif %}{% if filters.region_id %}&region_id={{ filters.region_id }}{% endif %}{% if filters.tea_type_id %}&tea_type_id={{ filters.tea_type_id }}{% endif %}{% if filters.flavor_id %}&flavor_id={{ filters.flavor_id }}{% endif %}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.sort %}&sort={{ filters.sort }}{% endif %}" class="btn btn-outline">← Назад</a>
+                    {% endif %}
+                    
+                    <span class="pagination-info">Страница {{ current_page }} из {{ total_pages }}</span>
+                    
+                    {% if current_page < total_pages %}
+                    <a href="?page={{ current_page + 1 }}{% if filters.country_id %}&country_id={{ filters.country_id }}{% endif %}{% if filters.region_id %}&region_id={{ filters.region_id }}{% endif %}{% if filters.tea_type_id %}&tea_type_id={{ filters.tea_type_id }}{% endif %}{% if filters.flavor_id %}&flavor_id={{ filters.flavor_id }}{% endif %}{% if filters.search %}&search={{ filters.search }}{% endif %}{% if filters.sort %}&sort={{ filters.sort }}{% endif %}" class="btn btn-outline">Вперед →</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="no-results">
+                    <p>😔 Чаи не найдены</p>
+                    <p>Попробуйте изменить фильтры</p>
+                </div>
+                {% endif %}
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/catalog.js"></script>
+{% endblock %}
+

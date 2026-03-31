@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/payment.css">
+{% endblock %}
+
+{% block content %}
+<div class="payment-page">
+    <div class="container">
+        {% if is_info_page %}
+        <div class="payment-shell">
+            <div class="payment-card">
+            <h1>Способы оплаты</h1>
+            <p>Мы принимаем оплату через СБП и банковские карты. На странице заказа доступен выбор удобного метода.</p>
+            <div class="payment-actions">
+                <a href="/cart" class="btn btn-primary">Перейти в корзину</a>
+            </div>
+        </div>
+        </div>
+        {% else %}
+        <div class="payment-shell" data-order-id="{{ order_id }}">
+            <div class="payment-card payment-main">
+                <div class="payment-head">
+                    <h1>Оплата заказа №{{ order_number }}</h1>
+                    <p class="payment-subtitle">Выберите способ оплаты</p>
+                </div>
+
+                <div class="payment-methods">
+                    <button class="payment-method-btn is-active" data-method="sbp">
+                        <span class="method-icon">⚡</span>
+                        <span>СБП</span>
+                    </button>
+                    <button class="payment-method-btn" data-method="card">
+                        <span class="method-icon">💳</span>
+                        <span>Карта</span>
+                    </button>
+                </div>
+
+                <div class="payment-panel" id="sbpPanel">
+                    <h3>Оплата через СБП</h3>
+                    <p class="panel-hint">Выберите банк, затем отсканируйте QR-код в приложении банка.</p>
+                    <div class="bank-grid" id="bankGrid">
+                        <button class="bank-btn is-selected" data-bank="sber">
+                            <span class="bank-logo bank-logo-sber">S</span>
+                            <span>СберБанк</span>
+                        </button>
+                        <button class="bank-btn" data-bank="tbank">
+                            <span class="bank-logo bank-logo-tbank">T</span>
+                            <span>Т-Банк</span>
+                        </button>
+                        <button class="bank-btn" data-bank="vtb">
+                            <span class="bank-logo bank-logo-vtb">V</span>
+                            <span>ВТБ</span>
+                        </button>
+                        <button class="bank-btn" data-bank="alfabank">
+                            <span class="bank-logo bank-logo-alfa">A</span>
+                            <span>Альфа-Банк</span>
+                        </button>
+                    </div>
+                    <button class="pay-btn" id="sbpPayBtn">Оплатить по СБП</button>
+
+                    <div id="sbpBlock" class="sbp-block" style="display: none;">
+                        <div class="qr-box">
+                            <img src="/static/qr/my-qr.png" alt="QR код СБП" class="qr-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-panel" id="cardPanel" style="display: none;">
+                    <h3>Оплата картой</h3>
+                    <p class="panel-hint">Тестовая форма. Данные никуда не отправляются.</p>
+                    <div class="card-form">
+                        <input id="cardNumber" type="text" maxlength="19" placeholder="0000 0000 0000 0000">
+                        <div class="card-row">
+                            <input id="cardExpiry" type="text" maxlength="5" placeholder="MM/YY">
+                            <input id="cardCvv" type="password" maxlength="3" placeholder="CVV">
+                        </div>
+                        <input id="cardHolder" type="text" maxlength="50" placeholder="IVAN IVANOV">
+                        <button class="pay-btn" id="cardPayBtn">Оплатить картой</button>
+                    </div>
+                </div>
+
+                <div id="paymentStatus" class="payment-status">Выберите способ оплаты</div>
+
+                <div id="paymentSuccess" class="payment-success" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>Оплата успешно принята</h3>
+                    <p>Чек отправим на email. Сейчас перенаправим вас в профиль.</p>
+                </div>
+            </div>
+
+            <div class="payment-card payment-side">
+                <h3>Детали заказа</h3>
+                <div class="summary-row">
+                    <span>Номер</span>
+                    <strong>{{ order_number }}</strong>
+                </div>
+                <div class="summary-row">
+                    <span>К оплате</span>
+                    <strong>{{ order_total }} ₽</strong>
+                </div>
+                <div class="summary-note">Безопасная тестовая страница оплаты для промо-демо.</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if not is_info_page %}
+<script src="/static/js/payment.js?v=20260324"></script>
+{% endif %}
+{% endblock %}

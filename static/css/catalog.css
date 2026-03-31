@@ -1,0 +1,399 @@
+/* Каталог чаев */
+
+.catalog-page {
+    padding: var(--spacing-lg) 0;
+}
+
+/* Табы каталога */
+.catalog-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.catalog-tab {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.catalog-tab:hover {
+    color: var(--primary-color);
+}
+
+.catalog-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+/* Фильтры */
+.filters-sidebar {
+    background: var(--surface);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+.filters-sidebar h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+}
+
+.filter-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--surface);
+    color: var(--text-primary);
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+.filter-group small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.search-hint {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.filter-group .btn {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+}
+
+/* Каталог */
+.catalog-content {
+    min-height: 500px;
+}
+
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.results-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Сетка чаев */
+.teas-grid,
+.blends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.tea-card,
+.blend-card {
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.tea-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.tea-image {
+    width: 100%;
+    height: 200px;
+    background: var(--background);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tea-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tea-placeholder {
+    font-size: 4rem;
+    opacity: 0.3;
+}
+
+.tea-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tea-info h3 {
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem;
+}
+
+.tea-info h3 a {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.tea-info h3 a:hover {
+    color: var(--primary-color);
+}
+
+.tea-location,
+.tea-region {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.tea-type {
+    display: inline-block;
+    background: var(--background);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+    width: fit-content;
+}
+
+.tea-flavors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin: var(--spacing-xs) 0;
+}
+
+.flavor-tag {
+    background: var(--background);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Основа сбора */
+.blend-base {
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.base-badge {
+    display: inline-block;
+    background: rgba(45, 80, 22, 0.1);
+    color: var(--primary-color);
+    padding: 0.35rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(45, 80, 22, 0.2);
+}
+
+/* Ингредиенты сборов */
+.blend-ingredients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.ingredient-badge {
+    background: var(--background);
+    padding: 0.35rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    display: inline-block;
+}
+
+.tea-rating {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    margin: var(--spacing-xs) 0;
+}
+
+.tea-price {
+    margin: var(--spacing-sm) 0;
+}
+
+.price-main {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+}
+
+.tea-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: var(--spacing-xs) 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tea-meta {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    margin: var(--spacing-xs) 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.tea-creator {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.price-sample {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.tea-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+}
+
+.tea-actions .btn {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
+}
+
+.pagination-info {
+    color: var(--text-secondary);
+}
+
+/* Нет результатов */
+.no-results {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.no-results p:first-child {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Адаптивность */
+@media (max-width: 968px) {
+    .catalog-tabs {
+        gap: var(--spacing-xs);
+    }
+
+    .catalog-tab {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 1rem;
+    }
+
+    .catalog-layout {
+        grid-template-columns: 200px 1fr;
+    }
+
+    .teas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: static;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .teas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .catalog-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .teas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tea-actions {
+        flex-direction: column;
+    }
+
+    .tea-actions .btn {
+        width: 100%;
+    }
+}

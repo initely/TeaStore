@@ -1,0 +1,383 @@
+{
+  "categories": [
+    {
+      "name": "Ягоды",
+      "name_en": "Berries",
+      "description": "Свежие и сушеные ягоды для добавления сладости и фруктовых нот",
+      "icon": "🫐"
+    },
+    {
+      "name": "Цветы",
+      "name_en": "Flowers",
+      "description": "Цветочные лепестки для нежного аромата и эстетики",
+      "icon": "🌸"
+    },
+    {
+      "name": "Пряности",
+      "name_en": "Spices",
+      "description": "Пряности и специи для согревающего эффекта и яркого вкуса",
+      "icon": "🌶️"
+    },
+    {
+      "name": "Фрукты",
+      "name_en": "Fruits",
+      "description": "Сушеные фрукты для сладости и цитрусовых нот",
+      "icon": "🍊"
+    },
+    {
+      "name": "Травы",
+      "name_en": "Herbs",
+      "description": "Лекарственные и ароматные травы",
+      "icon": "🌿"
+    },
+    {
+      "name": "Орехи и семена",
+      "name_en": "Nuts and Seeds",
+      "description": "Орехи и семена для орехового вкуса и текстуры",
+      "icon": "🥜"
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "Клубника",
+      "name_en": "Strawberry",
+      "category": "Ягоды",
+      "description": "Сушеная клубника добавляет сладкий фруктовый вкус и яркий аромат",
+      "price_per_100g": 450,
+      "price_per_20g": 100,
+      "flavor_profile": "сладкий, фруктовый, яркий"
+    },
+    {
+      "name": "Малина",
+      "name_en": "Raspberry",
+      "category": "Ягоды",
+      "description": "Сушеная малина с легкой кислинкой и нежным ароматом",
+      "price_per_100g": 480,
+      "price_per_20g": 110,
+      "flavor_profile": "сладкий, кисловатый, нежный"
+    },
+    {
+      "name": "Черника",
+      "name_en": "Blueberry",
+      "category": "Ягоды",
+      "description": "Сушеная черника с глубоким сладким вкусом",
+      "price_per_100g": 520,
+      "price_per_20g": 120,
+      "flavor_profile": "сладкий, глубокий, ягодный"
+    },
+    {
+      "name": "Облепиха",
+      "name_en": "Sea Buckthorn",
+      "category": "Ягоды",
+      "description": "Сушеная облепиха с яркой кислинкой и витаминами",
+      "price_per_100g": 400,
+      "price_per_20g": 90,
+      "flavor_profile": "кислый, яркий, витаминный"
+    },
+    {
+      "name": "Боярышник",
+      "name_en": "Hawthorn",
+      "category": "Ягоды",
+      "description": "Сушеный боярышник с мягким сладким вкусом",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "сладкий, мягкий, травяной"
+    },
+    {
+      "name": "Шиповник",
+      "name_en": "Rosehip",
+      "category": "Ягоды",
+      "description": "Сушеный шиповник с кислинкой и витамином C",
+      "price_per_100g": 380,
+      "price_per_20g": 85,
+      "flavor_profile": "кислый, витаминный, свежий"
+    },
+    {
+      "name": "Лепестки розы",
+      "name_en": "Rose Petals",
+      "category": "Цветы",
+      "description": "Сушеные лепестки розы для нежного цветочного аромата",
+      "price_per_100g": 600,
+      "price_per_20g": 140,
+      "flavor_profile": "цветочный, нежный, романтичный"
+    },
+    {
+      "name": "Лаванда",
+      "name_en": "Lavender",
+      "category": "Цветы",
+      "description": "Цветки лаванды для успокаивающего аромата",
+      "price_per_100g": 550,
+      "price_per_20g": 130,
+      "flavor_profile": "цветочный, успокаивающий, ароматный"
+    },
+    {
+      "name": "Жасмин",
+      "name_en": "Jasmine",
+      "category": "Цветы",
+      "description": "Цветки жасмина для изысканного цветочного аромата",
+      "price_per_100g": 650,
+      "price_per_20g": 150,
+      "flavor_profile": "цветочный, изысканный, нежный"
+    },
+    {
+      "name": "Ромашка",
+      "name_en": "Chamomile",
+      "category": "Цветы",
+      "description": "Цветки ромашки для мягкого успокаивающего вкуса",
+      "price_per_100g": 300,
+      "price_per_20g": 70,
+      "flavor_profile": "цветочный, мягкий, успокаивающий"
+    },
+    {
+      "name": "Василек",
+      "name_en": "Cornflower",
+      "category": "Цветы",
+      "description": "Лепестки василька для эстетики и легкого аромата",
+      "price_per_100g": 500,
+      "price_per_20g": 115,
+      "flavor_profile": "цветочный, легкий, нежный"
+    },
+    {
+      "name": "Календула",
+      "name_en": "Calendula",
+      "category": "Цветы",
+      "description": "Лепестки календулы с легким горьковатым вкусом",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "цветочный, горьковатый, полезный"
+    },
+    {
+      "name": "Имбирь",
+      "name_en": "Ginger",
+      "category": "Пряности",
+      "description": "Сушеный имбирь для согревающего эффекта и остроты",
+      "price_per_100g": 400,
+      "price_per_20g": 90,
+      "flavor_profile": "острый, согревающий, пряный"
+    },
+    {
+      "name": "Корица",
+      "name_en": "Cinnamon",
+      "category": "Пряности",
+      "description": "Палочки корицы для сладкого пряного аромата",
+      "price_per_100g": 450,
+      "price_per_20g": 100,
+      "flavor_profile": "сладкий, пряный, согревающий"
+    },
+    {
+      "name": "Гвоздика",
+      "name_en": "Cloves",
+      "category": "Пряности",
+      "description": "Бутоны гвоздики для интенсивного пряного аромата",
+      "price_per_100g": 500,
+      "price_per_20g": 115,
+      "flavor_profile": "пряный, интенсивный, согревающий"
+    },
+    {
+      "name": "Кардамон",
+      "name_en": "Cardamom",
+      "category": "Пряности",
+      "description": "Семена кардамона для экзотического аромата",
+      "price_per_100g": 600,
+      "price_per_20g": 140,
+      "flavor_profile": "пряный, экзотический, ароматный"
+    },
+    {
+      "name": "Анис",
+      "name_en": "Anise",
+      "category": "Пряности",
+      "description": "Звездчатый анис для сладкого лакричного вкуса",
+      "price_per_100g": 450,
+      "price_per_20g": 100,
+      "flavor_profile": "сладкий, лакричный, пряный"
+    },
+    {
+      "name": "Ваниль",
+      "name_en": "Vanilla",
+      "category": "Пряности",
+      "description": "Стручки ванили для кремового сладкого аромата",
+      "price_per_100g": 800,
+      "price_per_20g": 180,
+      "flavor_profile": "сладкий, кремовый, нежный"
+    },
+    {
+      "name": "Перец душистый",
+      "name_en": "Allspice",
+      "category": "Пряности",
+      "description": "Душистый перец для теплого пряного вкуса",
+      "price_per_100g": 400,
+      "price_per_20g": 90,
+      "flavor_profile": "пряный, теплый, ароматный"
+    },
+    {
+      "name": "Апельсин",
+      "name_en": "Orange",
+      "category": "Фрукты",
+      "description": "Сушеная цедра апельсина для цитрусового аромата",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "цитрусовый, свежий, яркий"
+    },
+    {
+      "name": "Лимон",
+      "name_en": "Lemon",
+      "category": "Фрукты",
+      "description": "Сушеная цедра лимона для свежести и кислинки",
+      "price_per_100g": 320,
+      "price_per_20g": 75,
+      "flavor_profile": "цитрусовый, кислый, свежий"
+    },
+    {
+      "name": "Яблоко",
+      "name_en": "Apple",
+      "category": "Фрукты",
+      "description": "Сушеные яблоки для мягкой сладости",
+      "price_per_100g": 280,
+      "price_per_20g": 65,
+      "flavor_profile": "сладкий, мягкий, фруктовый"
+    },
+    {
+      "name": "Груша",
+      "name_en": "Pear",
+      "category": "Фрукты",
+      "description": "Сушеные груши для нежной сладости",
+      "price_per_100g": 300,
+      "price_per_20g": 70,
+      "flavor_profile": "сладкий, нежный, фруктовый"
+    },
+    {
+      "name": "Курага",
+      "name_en": "Dried Apricots",
+      "category": "Фрукты",
+      "description": "Сушеные абрикосы для насыщенной сладости",
+      "price_per_100g": 380,
+      "price_per_20g": 85,
+      "flavor_profile": "сладкий, насыщенный, фруктовый"
+    },
+    {
+      "name": "Изюм",
+      "name_en": "Raisins",
+      "category": "Фрукты",
+      "description": "Сушеный виноград для естественной сладости",
+      "price_per_100g": 300,
+      "price_per_20g": 70,
+      "flavor_profile": "сладкий, естественный, фруктовый"
+    },
+    {
+      "name": "Мята",
+      "name_en": "Mint",
+      "category": "Травы",
+      "description": "Сушеная мята для свежести и прохлады",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "мятный, свежий, прохладный"
+    },
+    {
+      "name": "Мелисса",
+      "name_en": "Lemon Balm",
+      "category": "Травы",
+      "description": "Мелисса для успокаивающего эффекта и лимонного аромата",
+      "price_per_100g": 380,
+      "price_per_20g": 85,
+      "flavor_profile": "лимонный, успокаивающий, свежий"
+    },
+    {
+      "name": "Тимьян",
+      "name_en": "Thyme",
+      "category": "Травы",
+      "description": "Тимьян для пряного травяного вкуса",
+      "price_per_100g": 400,
+      "price_per_20g": 90,
+      "flavor_profile": "пряный, травяной, ароматный"
+    },
+    {
+      "name": "Шалфей",
+      "name_en": "Sage",
+      "category": "Травы",
+      "description": "Шалфей для горьковатого травяного вкуса",
+      "price_per_100g": 420,
+      "price_per_20g": 95,
+      "flavor_profile": "травяной, горьковатый, полезный"
+    },
+    {
+      "name": "Розмарин",
+      "name_en": "Rosemary",
+      "category": "Травы",
+      "description": "Розмарин для интенсивного хвойного аромата",
+      "price_per_100g": 450,
+      "price_per_20g": 100,
+      "flavor_profile": "хвойный, интенсивный, ароматный"
+    },
+    {
+      "name": "Душица",
+      "name_en": "Oregano",
+      "category": "Травы",
+      "description": "Душица для пряного средиземноморского вкуса",
+      "price_per_100g": 380,
+      "price_per_20g": 85,
+      "flavor_profile": "пряный, средиземноморский, ароматный"
+    },
+    {
+      "name": "Зверобой",
+      "name_en": "St. John's Wort",
+      "category": "Травы",
+      "description": "Зверобой для легкого горьковатого вкуса",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "травяной, горьковатый, полезный"
+    },
+    {
+      "name": "Миндаль",
+      "name_en": "Almond",
+      "category": "Орехи и семена",
+      "description": "Сушеный миндаль для орехового вкуса и текстуры",
+      "price_per_100g": 600,
+      "price_per_20g": 140,
+      "flavor_profile": "ореховый, сладкий, насыщенный"
+    },
+    {
+      "name": "Кокос",
+      "name_en": "Coconut",
+      "category": "Орехи и семена",
+      "description": "Сушеная кокосовая стружка для тропического вкуса",
+      "price_per_100g": 450,
+      "price_per_20g": 100,
+      "flavor_profile": "кокосовый, тропический, сладкий"
+    },
+    {
+      "name": "Кунжут",
+      "name_en": "Sesame",
+      "category": "Орехи и семена",
+      "description": "Семена кунжута для орехового вкуса",
+      "price_per_100g": 350,
+      "price_per_20g": 80,
+      "flavor_profile": "ореховый, нежный, ароматный"
+    },
+    {
+      "name": "Кедровые орехи",
+      "name_en": "Pine Nuts",
+      "category": "Орехи и семена",
+      "description": "Кедровые орехи для нежного орехового вкуса",
+      "price_per_100g": 800,
+      "price_per_20g": 180,
+      "flavor_profile": "ореховый, нежный, изысканный"
+    },
+    {
+      "name": "Фисташки",
+      "name_en": "Pistachios",
+      "category": "Орехи и семена",
+      "description": "Сушеные фисташки для яркого орехового вкуса",
+      "price_per_100g": 700,
+      "price_per_20g": 160,
+      "flavor_profile": "ореховый, яркий, насыщенный"
+    }
+  ]
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tea.name }} - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/tea_detail.css">
+{% endblock %}
+
+{% block content %}
+<div class="tea-detail-page">
+    <div class="container">
+        <!-- Хлебные крошки -->
+        <nav class="breadcrumbs">
+            <a href="/">Главная</a> / 
+            <a href="/catalog">Каталог</a> / 
+            {% if tea.country %}
+            <a href="/catalog?country_id={{ tea.country.id }}">{{ tea.country.name }}</a> / 
+            {% endif %}
+            <span>{{ tea.name }}</span>
+        </nav>
+
+        <div class="tea-detail-layout">
+            <!-- Левая колонка - изображение -->
+            <div class="tea-image-section">
+                <div class="tea-main-image">
+                    {% if tea.main_image_url %}
+                    <img src="{{ tea.main_image_url }}" alt="{{ tea.name }}">
+                    {% else %}
+                    <div class="tea-image-placeholder">🍃</div>
+                    {% endif %}
+                </div>
+                {% if tea.image_urls %}
+                <div class="tea-gallery">
+                    {% for img_url in tea.image_urls %}
+                    <div class="tea-gallery-item">
+                        <img src="{{ img_url }}" alt="{{ tea.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Правая колонка - информация -->
+            <div class="tea-info-section">
+                <h1>{{ tea.name }}</h1>
+                {% if tea.name_en %}
+                <p class="tea-name-en">{{ tea.name_en }}</p>
+                {% endif %}
+
+                <!-- Локация -->
+                <div class="tea-location">
+                    {% if tea.country %}
+                    <span class="location-item">
+                        <span class="flag">{{ tea.country.flag_emoji or '🌍' }}</span>
+                        <a href="/catalog?country_id={{ tea.country.id }}">{{ tea.country.name }}</a>
+                    </span>
+                    {% endif %}
+                    {% if tea.region %}
+                    <span class="location-item">
+                        <span class="separator">•</span>
+                        <a href="/catalog?country_id={{ tea.country.id }}&region_id={{ tea.region.id }}">{{ tea.region.name }}</a>
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- Тип чая -->
+                <div class="tea-type-badge">
+                    <a href="/catalog?tea_type_id={{ tea.tea_type.id }}">{{ tea.tea_type.name }}</a>
+                </div>
+
+                <!-- Рейтинг -->
+                <div class="tea-rating">
+                    <div class="stars">
+                        {% set rating_int = tea.rating|int %}
+                        {% for i in range(1, 6) %}
+                        {% if i <= rating_int %}
+                        <span class="star filled">⭐</span>
+                        {% else %}
+                        <span class="star">☆</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <span class="rating-value">{{ "%.1f"|format(tea.rating) }}</span>
+                    <span class="review-count">({{ tea.review_count }} отзывов)</span>
+                </div>
+
+                <!-- Вкусы и ароматы -->
+                {% if tea.flavors %}
+                <div class="tea-flavors">
+                    <h3>Вкусы и ароматы:</h3>
+                    <div class="flavors-list">
+                        {% for flavor in tea.flavors %}
+                        <span class="flavor-badge">{{ flavor.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Цены -->
+                <div class="tea-pricing">
+                    <div class="price-option">
+                        <div class="price-label">Пробник (20г)</div>
+                        <div class="price-value">
+                            {% if tea.price_per_20g %}
+                            {{ "%.0f"|format(tea.price_per_20g) }} ₽
+                            {% else %}
+                            Не доступен
+                            {% endif %}
+                        </div>
+                        {% if tea.price_per_20g %}
+                        <button class="btn btn-outline" onclick='window.addToCart({{ tea.id }}, 20, "tea")'>В корзину</button>
+                        {% endif %}
+                    </div>
+                    <div class="price-option featured">
+                        <div class="price-label">Полная версия (100г)</div>
+                        <div class="price-value">{{ "%.0f"|format(tea.price_per_100g) }} ₽</div>
+                        <button class="btn btn-primary" onclick='window.addToCart({{ tea.id }}, 100, "tea")'>В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Наличие -->
+                <div class="tea-stock">
+                    {% if tea.stock_quantity > 0 %}
+                    <span class="stock-available">✓ В наличии ({{ tea.stock_quantity }} шт.)</span>
+                    {% else %}
+                    <span class="stock-unavailable">✗ Нет в наличии</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Описание -->
+        <div class="tea-description-section">
+            <h2>Описание</h2>
+            {% if tea.description %}
+            <p>{{ tea.description }}</p>
+            {% else %}
+            <p>Описание пока не добавлено.</p>
+            {% endif %}
+
+            {% if tea.region and tea.region.tea_characteristics %}
+            <div class="region-info">
+                <h3>Особенности чая из региона {{ tea.region.name }}</h3>
+                <p>{{ tea.region.tea_characteristics }}</p>
+            </div>
+            {% endif %}
+
+            {% if tea.country and tea.country.tea_traditions %}
+            <div class="country-traditions">
+                <h3>Чайные традиции {{ tea.country.name }}</h3>
+                <p>{{ tea.country.tea_traditions }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Похожие чаи -->
+        {% if similar_teas %}
+        <div class="similar-teas-section">
+            <h2>Похожие чаи</h2>
+            <div class="similar-teas-grid">
+                {% for similar_tea in similar_teas %}
+                <div class="similar-tea-card card">
+                    <div class="similar-tea-image">
+                        {% if similar_tea.main_image_url %}
+                        <img src="{{ similar_tea.main_image_url }}" alt="{{ similar_tea.name }}">
+                        {% else %}
+                        <div class="tea-placeholder">🍃</div>
+                        {% endif %}
+                    </div>
+                    <h3><a href="/tea/{{ similar_tea.slug }}">{{ similar_tea.name }}</a></h3>
+                    <p class="similar-tea-location">
+                        {% if similar_tea.country %}{{ similar_tea.country.name }}{% endif %}
+                    </p>
+                    <div class="similar-tea-price">от {{ "%.0f"|format(similar_tea.price_per_100g) }} ₽</div>
+                    <a href="/tea/{{ similar_tea.slug }}" class="btn btn-outline">Подробнее</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Отзывы -->
+        <div class="reviews-section" data-product-type="tea" data-product-id="{{ tea.id }}">
+            <h2>Отзывы ({{ tea.review_count }})</h2>
+            <div id="reviewsList"></div>
+            <div id="reviewFormContainer"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/reviews.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadReviews('tea', {{ tea.id }});
+    });
+</script>
+{% endblock %}
+

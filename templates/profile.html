@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Личный кабинет - Wanderleaf Teas{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Личный кабинет</h1>
+            <button id="logoutBtn" class="logout-button">Выйти</button>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-info">
+                <h2>Информация о пользователе</h2>
+                <div class="info-card">
+                    <div class="info-row">
+                        <span class="info-label">Имя пользователя:</span>
+                        <span id="username" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span id="email" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Имя:</span>
+                        <span id="firstName" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Фамилия:</span>
+                        <span id="lastName" class="info-value"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-orders">
+                <div class="orders-header">
+                    <h2>Мои заказы</h2>
+                    <button id="toggleOrdersBtn" class="toggle-orders-btn">
+                        <span id="toggleOrdersText">Показать все</span>
+                        <span id="toggleOrdersIcon">▼</span>
+                    </button>
+                </div>
+                <div id="ordersList" class="orders-list orders-collapsed">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-blends">
+            <h2>Мои авторские сборы</h2>
+            <div id="blendsList" class="grid grid-3 blends-list">
+                <div class="loading">Загрузка...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/static/css/profile.css">
+<script src="/static/js/profile.js"></script>
+{% endblock %}
+

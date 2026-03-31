@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Чайная карта - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="/static/css/tea_map.css">
+{% endblock %}
+
+{% block content %}
+<div class="tea-map-page">
+    <div class="container">
+        <div class="tea-map-header">
+            <h1>Чайная карта мира</h1>
+            <p class="subtitle">Исследуйте чайные регионы и найдите свой идеальный чай</p>
+        </div>
+
+        <div class="tea-map-layout">
+            <!-- Карта -->
+            <div class="map-container">
+                <div id="teaMap"></div>
+                <div class="map-legend">
+                    <p>Кликните на страну, чтобы увидеть её чайные регионы и перейти к каталогу</p>
+                </div>
+            </div>
+
+            <!-- Список стран -->
+            <aside class="countries-sidebar">
+                <h2>Чайные страны</h2>
+                <div class="countries-list" id="countriesList">
+                    {% for country in countries %}
+                    <div class="country-item" data-country-id="{{ country.id }}">
+                        <span class="country-flag">{{ country.flag }}</span>
+                        <div class="country-info">
+                            <span class="country-name">{{ country.name }}</span>
+                            <span class="country-regions-count">
+                                {{ country.regions|length }} 
+                                {% if country.regions|length == 1 %}
+                                    регион
+                                {% elif country.regions|length < 5 %}
+                                    региона
+                                {% else %}
+                                    регионов
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Передаем данные стран в JavaScript
+    const countriesData = {{ countries | tojson }};
+</script>
+<script src="/static/js/tea_map.js"></script>
+{% endblock %}
+

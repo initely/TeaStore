@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wanderleaf Teas - интернет-магазин чая с конструктором авторских сборов">
+    <title>{% block title %}Wanderleaf Teas{% endblock %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <span class="logo-icon">🍃</span>
+                <span>Wanderleaf Teas</span>
+            </a>
+            
+            <nav class="nav">
+                <a href="/tea-map" class="nav-link">Чайная карта</a>
+                <a href="/blend-constructor" class="nav-link">Конструктор</a>
+                <a href="/catalog" class="nav-link">Каталог</a>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="cart-icon" onclick="window.location.href='/cart'">
+                    🛒
+                    <span class="cart-badge">0</span>
+                </div>
+                <div class="nav-auth">
+                    <!-- Кнопка входа (показывается если не авторизован) -->
+                    <a href="/login" id="authButton" class="auth-button" style="display: none;">
+                        Войти / Зарегистрироваться
+                    </a>
+                    <!-- Ссылка на админ-панель (показывается только для администраторов) -->
+                    <a href="/admin" id="adminLink" class="admin-link" style="display: none;">
+                        ⚙️ Админ-панель
+                    </a>
+                    <!-- Информация о пользователе (показывается если авторизован) -->
+                    <a href="/profile" id="userInfo" class="user-info" style="display: none;">
+                        <span class="user-icon">👤</span>
+                        <span class="username"></span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <nav class="mobile-nav">
+                <a href="/tea-map" class="nav-link">Чайная карта</a>
+                <a href="/blend-constructor" class="nav-link">Конструктор</a>
+                <a href="/catalog" class="nav-link">Каталог</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>О нас</h3>
+                    <ul>
+                        <li><a href="/about">О компании</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
+                        <li><a href="/delivery">Доставка</a></li>
+                        <li><a href="/payment">Оплата</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Каталог</h3>
+                    <ul>
+                        <li><a href="/catalog">Все чаи</a></li>
+                        <li><a href="/countries">По странам</a></li>
+                        <li><a href="/blend-constructor">Конструктор</a></li>
+                        <li><a href="/popular-blends">Популярные сборы</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/returns">Возвраты</a></li>
+                        <li><a href="/privacy">Конфиденциальность</a></li>
+                        <li><a href="/terms">Условия использования</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>Email: info@wanderleafteas.com</p>
+                    <p>Телефон: +7 (999) 123-45-67</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🐦</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wanderleaf Teas. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/auth_status.js"></script>
+    <script src="/static/js/cart_utils.js"></script>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

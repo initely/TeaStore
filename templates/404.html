@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Страница не найдена - Wanderleaf Teas{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center; padding: 4rem 0;">
+    <h1>404</h1>
+    <h2>Страница не найдена</h2>
+    <p style="color: var(--text-secondary); margin: 2rem 0;">{{ message or "Запрашиваемая страница не существует." }}</p>
+    <a href="/" class="btn btn-primary">Вернуться на главную</a>
+    <a href="/catalog" class="btn btn-outline" style="margin-left: 1rem;">Перейти в каталог</a>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

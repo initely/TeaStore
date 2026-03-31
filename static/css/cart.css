@@ -1,0 +1,218 @@
+/* Стили для страницы корзины */
+
+.cart-page {
+    padding: var(--spacing-lg) 0;
+}
+
+.cart-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Пустая корзина */
+.empty-cart {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.empty-cart-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.5;
+}
+
+.empty-cart h2 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.empty-cart p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Товары в корзине */
+.cart-items {
+    margin-bottom: var(--spacing-lg);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--surface);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+    box-shadow: var(--shadow-sm);
+    gap: var(--spacing-md);
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-info h3 {
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem;
+}
+
+.cart-item-info h3 a {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.cart-item-info h3 a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.cart-item-meta {
+    display: flex;
+    gap: var(--spacing-sm);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.item-type,
+.item-size {
+    padding: 0.25rem 0.5rem;
+    background: var(--background);
+    border-radius: 4px;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.quantity-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-right: var(--spacing-xs);
+}
+
+.quantity-unit {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-left: var(--spacing-xs);
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border-color);
+    background: var(--surface);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.qty-btn:hover {
+    background: var(--background);
+    border-color: var(--primary-color);
+}
+
+.qty-input {
+    width: 60px;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cart-item-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    min-width: 100px;
+    text-align: right;
+}
+
+.remove-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: var(--error);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.remove-btn:hover {
+    background: #d32f2f;
+    transform: scale(1.1);
+}
+
+/* Итоговая информация */
+.cart-summary {
+    background: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 100px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.summary-row.total {
+    border-bottom: 2px solid var(--primary-color);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+}
+
+.total-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.cart-summary .btn {
+    width: 100%;
+    margin-top: var(--spacing-md);
+}
+
+.cart-summary .btn-outline {
+    margin-top: var(--spacing-sm);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cart-item-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .cart-summary {
+        position: static;
+    }
+}
+

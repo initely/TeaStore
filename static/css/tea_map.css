@@ -1,0 +1,323 @@
+/* Стили для чайной карты */
+
+.tea-map-page {
+    padding: var(--spacing-lg) 0;
+    min-height: calc(100vh - 200px);
+}
+
+.tea-map-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.tea-map-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.tea-map-header .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.tea-map-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+.map-container {
+    position: relative;
+    background: var(--surface);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+#teaMap {
+    width: 100%;
+    height: 600px;
+    z-index: 1;
+}
+
+.map-legend {
+    padding: var(--spacing-md);
+    background: var(--background);
+    border-top: 1px solid var(--border-color);
+}
+
+.map-legend h3 {
+    display: none; /* Скрываем заголовок "Легенда" */
+}
+
+.map-legend p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0; /* Убираем нижний отступ */
+}
+
+/* Маркеры на карте */
+.tea-country-marker {
+    background: transparent;
+    border: none;
+}
+
+.marker-content {
+    background: white;
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: var(--transition);
+    transform-origin: center center;
+}
+
+.marker-content:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-dark);
+}
+
+/* Стили для попапа страны */
+.country-popup-container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.country-popup {
+    padding: 0;
+    min-width: 280px;
+}
+
+.country-popup-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.country-flag-popup {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.country-name-popup {
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin: 0;
+    font-weight: 600;
+}
+
+.regions-count {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    padding: 0;
+}
+
+.popup-regions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.region-popup-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.region-popup-item:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    color: var(--primary-dark);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.region-name {
+    font-weight: 500;
+    flex: 1;
+}
+
+.region-arrow {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.region-popup-item:hover .region-arrow {
+    color: var(--primary-color);
+    transform: translateX(2px);
+}
+
+.btn-view-catalog {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-view-catalog:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
+}
+
+.countries-sidebar {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.countries-sidebar h2 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.countries-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.country-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--background);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.country-item:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.country-item.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-dark);
+}
+
+.country-flag {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.country-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+}
+
+.country-name {
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.country-regions-count {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.country-item.active .country-regions-count {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Скрываем атрибуцию Leaflet */
+.leaflet-control-attribution {
+    display: none !important;
+}
+
+/* Адаптивность */
+@media (max-width: 968px) {
+    .tea-map-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .countries-sidebar {
+        position: static;
+        max-height: none;
+    }
+    
+    #teaMap {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tea-map-header h1 {
+        font-size: 2rem;
+    }
+    
+    .tea-map-header .subtitle {
+        font-size: 1rem;
+    }
+    
+    #teaMap {
+        height: 400px;
+    }
+    
+    .countries-sidebar {
+        padding: var(--spacing-md);
+    }
+    
+    .countries-sidebar h2 {
+        font-size: 1.25rem;
+    }
+    
+    .country-popup {
+        min-width: 250px;
+    }
+    
+    .popup-regions {
+        max-height: 200px;
+    }
+}

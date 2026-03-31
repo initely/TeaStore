@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Конструктор авторских сборов - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/blend_constructor.css">
+{% endblock %}
+
+{% block content %}
+<div class="constructor-page">
+    <div class="container">
+        <h1>Конструктор авторских сборов</h1>
+        <p class="page-subtitle">Создайте свой уникальный чайный сбор! Выберите основу и добавьте до 5 ингредиентов.</p>
+        
+        <div class="constructor-layout">
+            <!-- Левая панель - Выбор компонентов -->
+            <div class="components-panel">
+                <h2>Выберите компоненты</h2>
+                
+                <!-- Выбор основы -->
+                <div class="component-section">
+                    <h3>Основа чая</h3>
+                    <div class="base-selection">
+                        {% for tea_type in tea_types %}
+                        <div class="base-option" data-type-id="{{ tea_type.id }}" onclick="selectBaseType({{ tea_type.id }}, '{{ tea_type.name }}')">
+                            <div class="base-icon">🍃</div>
+                            <div class="base-name">{{ tea_type.name }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="selected-base" id="selectedBaseType">
+                        <span class="selected-label">Тип основы не выбран</span>
+                    </div>
+                    
+                    <!-- Выбор конкретного чая -->
+                    <div class="tea-selection" id="teaSelection" style="display: none;">
+                        <h4>Выберите конкретный чай (опционально)</h4>
+                        <div class="tea-options" id="teaOptions">
+                            <div class="loading-teas">Загрузка чаев...</div>
+                        </div>
+                        <div class="selected-tea" id="selectedTea">
+                            <span class="selected-label">Или используйте просто тип чая</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Выбор ингредиентов -->
+                <div class="component-section">
+                    <h3>Добавить ингредиенты (до 5)</h3>
+                    <div class="ingredients-tabs">
+                        {% for category in categories %}
+                        {% if ingredients_by_category[category.name] %}
+                        <button class="tab-btn" onclick="showCategory('{{ category.name }}')" data-category="{{ category.name }}">
+                            {{ category.icon or '🍯' }} {{ category.name }}
+                        </button>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="ingredients-list">
+                        {% for category_name, ingredients in ingredients_by_category.items() %}
+                        <div class="ingredient-category {% if loop.first %}active{% endif %}" id="category-{{ category_name }}">
+                            {% for ingredient in ingredients %}
+                            <div class="ingredient-item" data-ingredient-id="{{ ingredient.id }}">
+                                <div class="ingredient-info">
+                                    <div class="ingredient-name">{{ ingredient.name }}</div>
+                                    {% if ingredient.description %}
+                                    <div class="ingredient-description">{{ ingredient.description[:100] }}{% if ingredient.description|length > 100 %}...{% endif %}</div>
+                                    {% endif %}
+                                    <div class="ingredient-price">{{ "%.0f"|format(ingredient.price_per_100g) }} ₽ / 100г</div>
+                                </div>
+                                <button class="btn btn-primary btn-sm" onclick="addIngredient({{ ingredient.id }}, '{{ ingredient.name }}', {{ ingredient.price_per_100g }}, {{ ingredient.price_per_20g or 0 }})">
+                                    Добавить
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая панель - Состав сбора -->
+            <div class="blend-panel">
+                <h2>Ваш сбор</h2>
+                
+                <div class="blend-composition" id="blendComposition">
+                    <div class="empty-state">
+                        <p>🌿</p>
+                        <p>Выберите основу и добавьте ингредиенты, чтобы начать создавать свой сбор</p>
+                    </div>
+                </div>
+                
+                <!-- Название сбора -->
+                <div class="blend-name-section" id="blendNameSection" style="display: none;">
+                    <label>Название вашего сбора:</label>
+                    <input type="text" id="blendName" placeholder="Например: Утренний бодрящий" maxlength="100">
+                </div>
+                
+                <!-- Итоговая информация -->
+                <div class="blend-summary" id="blendSummary" style="display: none;">
+                    <div class="summary-row">
+                        <span>Общий вес:</span>
+                        <span id="totalWeight" class="price">0 г</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Общая стоимость:</span>
+                        <span id="totalPrice" class="price">0 ₽</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Цена за 100г:</span>
+                        <span id="price100g" class="price">0 ₽</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Цена за 20г (пробник):</span>
+                        <span id="price20g" class="price">0 ₽</span>
+                    </div>
+                </div>
+                
+                <!-- Действия -->
+                <div class="blend-actions" id="blendActions" style="display: none;">
+                    <button class="btn btn-primary" onclick="saveBlend()">Сохранить рецепт</button>
+                    <button class="btn btn-outline" onclick="resetBlend()">Начать заново</button>
+                </div>
+                
+                <!-- Инструкция -->
+                <div class="constructor-help">
+                    <h3>Как пользоваться:</h3>
+                    <ol>
+                        <li>Выберите тип основы чая (белый, зеленый, пуэр и т.д.)</li>
+                        <li>Выберите конкретный чай этого типа (опционально) или используйте просто тип</li>
+                        <li>Добавьте до 5 ингредиентов из каталога</li>
+                        <li>Укажите вес каждого компонента в граммах (поле ввода или ползунок)</li>
+                        <li>Дайте название своему сбору</li>
+                        <li>Сохраните рецепт - вы сможете добавить сбор в корзину на его странице</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/blend_constructor.js"></script>
+{% endblock %}
+

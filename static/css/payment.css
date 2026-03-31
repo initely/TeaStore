@@ -1,0 +1,225 @@
+.payment-page {
+    padding: 36px 0;
+    background: linear-gradient(180deg, #f8fbff 0%, #f3f7fc 100%);
+}
+
+.payment-shell {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+}
+
+.payment-card {
+    background: #fff;
+    border: 1px solid #e5eaf1;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+}
+
+.payment-subtitle {
+    margin-top: 6px;
+    color: #4b5563;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+}
+
+.payment-method-btn {
+    border: 1px solid #d1d5db;
+    background: #f8fbff;
+    border-radius: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.payment-method-btn.is-active {
+    border-color: #2f7df6;
+    background: #eef5ff;
+    color: #1f4fa8;
+}
+
+.payment-method-btn:hover {
+    background: #f1f5f9;
+}
+
+.method-icon {
+    font-size: 16px;
+}
+
+.payment-panel {
+    border: 1px solid #e6edf6;
+    border-radius: 12px;
+    padding: 16px;
+    background: #fbfdff;
+}
+
+.panel-hint {
+    margin: 6px 0 12px;
+    color: #667085;
+    font-size: 14px;
+}
+
+.bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.bank-btn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bank-btn.is-selected {
+    border-color: #2f7df6;
+    background: #eef5ff;
+}
+
+.bank-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: inline-grid;
+    place-items: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.bank-logo-sber { background: #00b956; }
+.bank-logo-tbank { background: #111111; }
+.bank-logo-vtb { background: #005bff; }
+.bank-logo-alfa { background: #ef3124; }
+
+.pay-btn {
+    border: none;
+    border-radius: 10px;
+    background: #1f6feb;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background: #1659bd;
+}
+
+.card-form input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d7deea;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card-row {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 10px;
+}
+
+.payment-status {
+    min-height: 24px;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.payment-status-success {
+    color: #047857;
+}
+
+.payment-status-error {
+    color: #b91c1c;
+}
+
+.sbp-block {
+    margin-top: 14px;
+    border: 1px dashed #9ab1d6;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    background: #fff;
+}
+
+.qr-box {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 12px;
+    background: #fff;
+    border: 8px solid #111827;
+    display: grid;
+    place-items: center;
+}
+
+.qr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 2px;
+}
+
+.payment-success {
+    margin-top: 14px;
+    border: 1px solid #b9e6cb;
+    background: #f0fff5;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.success-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #22c55e;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.summary-note {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #667085;
+}
+
+.payment-actions {
+    margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+    .payment-shell {
+        grid-template-columns: 1fr;
+    }
+}

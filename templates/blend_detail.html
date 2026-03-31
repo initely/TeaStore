@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}{{ blend.name }} - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/tea_detail.css">
+<link rel="stylesheet" href="/static/css/blend_detail.css">
+{% endblock %}
+
+{% block content %}
+<div class="tea-detail-page">
+    <div class="container">
+        <!-- Хлебные крошки -->
+        <nav class="breadcrumbs">
+            <a href="/">Главная</a> /
+            <a href="/catalog?tab=blends">Каталог сборов</a> /
+            <span>{{ blend.name }}</span>
+        </nav>
+
+        <!-- Основной layout -->
+        <div class="tea-detail-layout">
+            <!-- Изображение сбора -->
+            <div class="tea-image-section">
+                <div class="tea-main-image">
+                    <div class="tea-image-placeholder">🍵</div>
+                </div>
+            </div>
+
+            <!-- Информация о сборе -->
+            <div class="tea-info-section">
+                <h1>{{ blend.name }}</h1>
+
+                {% if blend.creator %}
+                <div class="tea-location">
+                    <span>👤 Автор: <strong>{{ blend.creator.username }}</strong></span>
+                </div>
+                {% endif %}
+
+                {% if blend.base_tea %}
+                <div class="tea-location">
+                    <span>🏷️ Основа: <strong><a href="/tea/{{ blend.base_tea.slug }}">{{ blend.base_tea.name
+                                }}</a></strong></span>
+                </div>
+                {% elif blend.base_tea_type %}
+                <div class="tea-location">
+                    <span>🏷️ Основа: <strong>{{ blend.base_tea_type.name }}</strong></span>
+                </div>
+                {% endif %}
+
+                <div class="tea-rating">
+                    <div class="stars">
+                        {% set rating_int = blend.rating|int %}
+                        {% for i in range(1, 6) %}
+                        {% if i <= rating_int %} <span class="star filled">⭐</span>
+                            {% else %}
+                            <span class="star">☆</span>
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                    <span class="rating-value">{{ "%.1f"|format(blend.rating) }}</span>
+                    <span class="review-count">({{ blend.review_count }} отзывов)</span>
+                </div>
+
+                {% if blend.description %}
+                <div class="tea-description-short">
+                    <p>{{ blend.description }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Состав сбора -->
+                <div class="blend-composition">
+                    <h2>Состав сбора</h2>
+                    <div class="composition-list">
+                        {% if blend.base_tea %}
+                        <div class="composition-item">
+                            <span class="component-name"><a href="/tea/{{ blend.base_tea.slug }}">{{ blend.base_tea.name
+                                    }}</a></span>
+                            <span class="component-amount">Основа</span>
+                        </div>
+                        {% elif blend.base_tea_type %}
+                        <div class="composition-item">
+                            <span class="component-name">{{ blend.base_tea_type.name }}</span>
+                            <span class="component-amount">Основа</span>
+                        </div>
+                        {% endif %}
+                        {% for component in components %}
+                        {% if component.ingredient %}
+                        <div class="composition-item">
+                            <span class="component-name">{{ component.ingredient.name }}</span>
+                            <span class="component-amount">
+                                {{ "%.1f"|format(component.grams_per_100g) }}г
+                                {% if total_weight > 0 %}
+                                ({{ "%.1f"|format((component.grams_per_100g / total_weight) * 100) }}%)
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Цена и действия -->
+                <div class="tea-pricing">
+                    {% if blend.price_per_20g %}
+                    <div class="price-option">
+                        <div class="price-label">Пробник (20г)</div>
+                        <div class="price-value">{{ "%.0f"|format(blend.price_per_20g) }} ₽</div>
+                        <button class="btn btn-outline" onclick='window.addToCart({{ blend.id }}, 20, "blend")'>В
+                            корзину</button>
+                    </div>
+                    {% endif %}
+                    {% if blend.price_per_100g %}
+                    <div class="price-option featured">
+                        <div class="price-label">Полная версия (100г)</div>
+                        <div class="price-value">{{ "%.0f"|format(blend.price_per_100g) }} ₽</div>
+                        <button class="btn btn-primary" onclick='window.addToCart({{ blend.id }}, 100, "blend")'>В
+                            корзину</button>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Статистика -->
+                <div class="blend-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Покупок:</span>
+                        <span class="stat-value">{{ blend.purchase_count }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Отзывов:</span>
+                        <span class="stat-value">{{ blend.review_count }}</span>
+                    </div>
+                    {% if blend.created_at %}
+                    <div class="stat-item">
+                        <span class="stat-label">Создан:</span>
+                        <span class="stat-value">{{ blend.created_at.strftime('%d.%m.%Y') }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Полное описание -->
+        {% if blend.description %}
+        <div class="tea-description-section">
+            <h2>Описание</h2>
+            <p>{{ blend.description }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Отзывы -->
+        <div class="reviews-section" data-product-type="blend" data-product-id="{{ blend.id }}">
+            <h2>Отзывы ({{ blend.review_count }})</h2>
+            <div id="reviewsList"></div>
+            <div id="reviewFormContainer"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/reviews.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadReviews('blend', {{ blend.id }});
+    });
+</script>
+{% endblock %}

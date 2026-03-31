@@ -1,0 +1,577 @@
+/* Конструктор авторских сборов */
+
+.constructor-page {
+    padding: var(--spacing-lg) 0;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.constructor-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-md);
+}
+
+/* Левая панель - Компоненты */
+.components-panel {
+    background: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.component-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.component-section:last-child {
+    margin-bottom: 0;
+}
+
+.component-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+/* Выбор основы */
+.base-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.base-option {
+    background: var(--background);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.base-option:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.base-option.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.base-icon {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.base-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.selected-base {
+    background: var(--background);
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.selected-label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.selected-base .base-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Выбор конкретного чая */
+.tea-selection {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.tea-selection h4 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.tea-options {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: var(--spacing-sm);
+}
+
+.tea-option {
+    background: var(--background);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tea-option:hover {
+    border-color: var(--primary-color);
+    background: rgba(45, 80, 22, 0.05);
+    box-shadow: 0 2px 8px rgba(45, 80, 22, 0.15);
+}
+
+.tea-option.selected {
+    background: rgba(45, 80, 22, 0.1);
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.tea-option-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tea-option-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.loading-teas,
+.no-teas,
+.error-teas {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.selected-tea {
+    background: var(--background);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.selected-tea .tea-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Ингредиенты */
+.ingredients-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+    background: var(--background);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.ingredients-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.ingredient-category {
+    display: none;
+}
+
+.ingredient-category.active {
+    display: block;
+}
+
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm);
+    background: var(--background);
+    border-radius: 4px;
+    margin-bottom: var(--spacing-xs);
+    transition: var(--transition);
+}
+
+.ingredient-item:hover {
+    background: #f5f5f5;
+}
+
+.ingredient-info {
+    flex-grow: 1;
+}
+
+.ingredient-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.ingredient-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.ingredient-price {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Правая панель - Состав */
+.blend-panel {
+    background: var(--surface);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.blend-panel h2 {
+    margin-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+.blend-composition {
+    min-height: 200px;
+    margin-bottom: var(--spacing-md);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.empty-state p:first-child {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.5;
+}
+
+/* Компоненты сбора */
+.blend-component-item {
+    background: var(--background);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+    border-left: 4px solid var(--primary-color);
+}
+
+.component-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.component-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.component-remove {
+    background: none;
+    border: none;
+    color: var(--error);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.component-remove:hover {
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.weight-control {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+}
+
+.weight-input {
+    width: 80px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.weight-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+.weight-unit {
+    font-weight: 500;
+    color: var(--text-secondary);
+    min-width: 20px;
+}
+
+.component-slider {
+    flex-grow: 1;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--border-color);
+    outline: none;
+    cursor: pointer;
+}
+
+.component-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: grab;
+    transition: var(--transition);
+}
+
+.component-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+.component-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: grab;
+    border: none;
+    transition: var(--transition);
+}
+
+.component-slider::-moz-range-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+.component-slider:focus {
+    box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+.component-percentage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-xs);
+}
+
+.percentage-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.percentage-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Название сбора */
+.blend-name-section {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--background);
+    border-radius: 8px;
+}
+
+.blend-name-section label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.blend-name-section input {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.blend-name-section input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+/* Итоговая информация */
+.blend-summary {
+    background: var(--background);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-md);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row .price {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Действия */
+.blend-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.blend-actions .btn {
+    width: 100%;
+}
+
+/* Инструкция */
+.constructor-help {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--background);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.constructor-help h3 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-dark);
+}
+
+.constructor-help ol {
+    margin-left: var(--spacing-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.constructor-help li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Адаптивность */
+@media (max-width: 968px) {
+    .constructor-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .blend-panel {
+        position: static;
+        max-height: none;
+    }
+    
+    .base-selection {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .components-panel,
+    .blend-panel {
+        padding: var(--spacing-md);
+    }
+    
+    .ingredients-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: left;
+        width: 100%;
+    }
+    
+    .blend-actions {
+        flex-direction: column;
+    }
+}
+

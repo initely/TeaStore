@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация - Wanderleaf Teas{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/auth.css">
+{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="container">
+        <div class="auth-container">
+            <h1>Регистрация</h1>
+            <p class="auth-subtitle">Создайте новый аккаунт</p>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required minlength="6">
+                    <small>Минимум 6 символов</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="first_name">Имя (необязательно)</label>
+                    <input type="text" id="first_name" name="first_name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="last_name">Фамилия (необязательно)</label>
+                    <input type="text" id="last_name" name="last_name">
+                </div>
+                
+                <div class="form-error" id="errorMessage" style="display: none;"></div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+            </form>
+            
+            <p class="auth-footer">
+                Уже есть аккаунт? <a href="/login" id="loginLink">Войдите</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/register.js"></script>
+<script>
+// Передаем параметры URL на страницу входа
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLink = document.getElementById('loginLink');
+    if (loginLink) {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.toString()) {
+            loginLink.href = '/login?' + urlParams.toString();
+        }
+    }
+});
+</script>
+{% endblock %}
+
